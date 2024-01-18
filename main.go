@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-  "github.com/Tafara96/estiam-main/route"
+  "routes"
 	"github.com/Tafara96/estiam-main/dictionary"
 )
 
