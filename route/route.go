@@ -4,7 +4,6 @@ import (
     "encoding/json"
     "github.com/gorilla/mux"
     "net/http"
-    "github.com/Tafara96/estiam-main/dictionary"
 )
 
 func SetupRoutes(dictionary *dictionary.Dictionary) *mux.Router {
