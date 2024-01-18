@@ -5,10 +5,18 @@ import (
     "github.com/gorilla/mux"
     "net/http"
     "github.com/Tafara96/estiam-main/dictionary"
+    "github.com/Tafara96/estiam-main/middleware"
 )
 
 func SetupRoutes(dictionary *dictionary.Dictionary) *mux.Router {
     router := mux.NewRouter()
+
+    // Ajoute le middleware LoggerMiddleware à toutes les routes
+    router.Use(middleware.LoggerMiddleware)
+
+    // Ajoute le middleware AuthMiddleware à toutes les routes nécessitant une authentification
+    authenticatedRouter := router.PathPrefix("/dictionary").Subrouter()
+    authenticatedRouter.Use(middleware.AuthMiddleware)
 
     // Route pour ajouter une entrée au dictionnaire (POST)
     router.HandleFunc("/dictionary/add", addEntryHandler(dictionary)).Methods("POST")
