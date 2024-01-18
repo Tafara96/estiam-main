@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-  "github.com/Tafara96/estiam-main/routes"
+  "github.com/Tafara96/estiam-main/route"
 	"github.com/Tafara96/estiam-main/dictionary"
 )
 
