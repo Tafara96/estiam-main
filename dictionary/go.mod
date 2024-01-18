@@ -1,3 +1,3 @@
-module github.com/Tafara96/estiam-main/dictionary
+module dictionary
 
 go 1.13
