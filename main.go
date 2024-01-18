@@ -7,7 +7,7 @@ import (
 
 func main() {
 	//Créer un nouveau dictionnaire
-	leDictionnaire := dictionary.New()
+	leDictionnaire := dictionary.New("dictionary.txt")
 
 	//Ajouter des entrées au dictionnaire
 	leDictionnaire.Add("tesla", "une voiture")
