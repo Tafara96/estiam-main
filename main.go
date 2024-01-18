@@ -7,31 +7,31 @@ import (
 
 func main() {
 	//Créer un nouveau dictionnaire
-	myDictionary := dictionary.New()
+	leDictionnaire := dictionary.New()
 
 	//Ajouter des entrées au dictionnaire
-	myDictionary.Add("apple", "a fruit")
-	myDictionary.Add("gopher", "the Go mascot")
-	myDictionary.Add("map", "a collection of key-value pairs")
+	leDictionnaire.Add("tesla", "une voiture")
+	leDictionnaire.Add("arafat", "une personne")
+	leDictionnaire.Add("paris", "une ville")
 
 	//Récupère et affiche la définition d'un mot spécifique
-	wordToGet := "gopher"
-	entry, err := myDictionary.Get(wordToGet)
+	motRecherche := "arafat"
+	entry, err := leDictionnaire.Get(motRecherche)
 	if err != nil {
-		fmt.Printf("Error: %s\n", err)
+		fmt.Printf("Erreur: %s\n", err)
 	} else {
-		fmt.Printf("Definition of '%s': %s\n", wordToGet, entry)
+		fmt.Printf("La definition de '%s' est %s\n", motRecherche, entry)
 	}
 
 	//Supprimer un mot du dictionnaire
-	wordToRemove := "apple"
-	myDictionary.Remove(wordToRemove)
-	fmt.Printf("'%s' removed from the dictionary\n", wordToRemove)
+	motIndesire := "tesla"
+	leDictionnaire.Remove(motIndesire)
+	fmt.Printf("'%s' à été retiré du dictionnaire \n", motIndesire)
 
 	//Liste tous les mots et leurs entrées dans le dictionnaire
-	wordList, entries := myDictionary.List()
-	fmt.Println("List of words in the dictionary:")
-	for _, word := range wordList {
+	listeDeMots, entries := leDictionnaire.List()
+	fmt.Println("Liste triée des mots du dictionnaire:")
+	for _, word := range listeDeMots {
 		fmt.Printf("%s: %s\n", word, entries[word])
 	}
 }

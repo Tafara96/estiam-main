@@ -28,40 +28,40 @@ func New() *Dictionary {
 }
 
 //Ajouter ajoute un mot et sa définition au dictionnaire
-func (d *Dictionary) Add(word string, definition string) {
+func (d *Dictionary) Add(mot string, definition string) {
 	entry := Entry{Definition: definition}
-  d.entries[word] = entry
+  d.entries[mot] = entry
 }
 
 //Get récupère l'entrée d'un mot spécifique dans le dictionnaire
-func (d *Dictionary) Get(word string) (Entry, error) {
+func (d *Dictionary) Get(mot string) (Entry, error) {
 
-	entry, exists := d.entries[word]
+	entry, exists := d.entries[mot]
 	if !exists {
-		return Entry{}, fmt.Errorf("word not found: %s", word)
+		return Entry{}, fmt.Errorf("mot introuvable: %s", mot)
 	}
 	return entry, nil
 }
 
 //Remove supprime un mot et son entrée du dictionnaire
-func (d *Dictionary) Remove(word string) {
-  delete(d.entries, word)
+func (d *Dictionary) Remove(mot string) {
+  delete(d.entries, mot)
 }
 
 //List renvoie une liste triée de mots et leurs entrées du dictionnaire
 func (d *Dictionary) List() ([]string, map[string]Entry) {
 
-	var wordList []string
-	for word := range d.entries {
-		wordList = append(wordList, word)
+	var listeDeMots []string
+	for mot := range d.entries {
+		listeDeMots = append(listeDeMots, mot)
 	}
 
-	sort.Strings(wordList)
+	sort.Strings(listeDeMots)
 
 	var entriesMap = make(map[string]Entry)
-	for _, word := range wordList {
-		entriesMap[word] = d.entries[word]
+	for _, mot := range listeDeMots {
+		entriesMap[mot] = d.entries[mot]
 	}
 
-	return wordList, entriesMap
+	return listeDeMots, entriesMap
 }
