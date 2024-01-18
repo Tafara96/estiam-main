@@ -10,7 +10,8 @@ import (
 
 //L'entrée représente une entrée dans le dictionnaire avec un mot et sa définition
 type Entry struct {
-	Definition string
+	Word string `json:"word"`
+	Definition string `json:"definition"`
 }
 
 type Dictionary struct {
