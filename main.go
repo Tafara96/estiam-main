@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
   "fmt"
-	"github.com/Tafara96/estiam-main/dictionary/dictionary"
+	"github.com/Tafara96/estiam-main/dictionary"
 )
 
 func main() {
