@@ -22,10 +22,10 @@ func SetupRoutes(dictionary *dictionary.Dictionary) *mux.Router {
     router.HandleFunc("/dictionary/add", addEntryHandler(dictionary)).Methods("POST")
 
     // Route pour récupérer une définition par mot (GET)
-    router.HandleFunc("/dictionary/{word}", getDefinitionHandler(dictionary)).Methods("GET")
+    router.HandleFunc("/dictionary/{mot}", getDefinitionHandler(dictionary)).Methods("GET")
 
     // Route pour supprimer une entrée par mot (DELETE)
-    router.HandleFunc("/dictionary/{word}", removeEntryHandler(dictionary)).Methods("DELETE")
+    router.HandleFunc("/dictionary/{mot}", removeEntryHandler(dictionary)).Methods("DELETE")
 
     return router
 }
@@ -56,10 +56,10 @@ func getDefinitionHandler(dictionary *dictionary.Dictionary) http.HandlerFunc {
         // Votre logique pour récupérer une définition ici
         // Récupère le paramètre du mot depuis l'URL de la requête
     		params := mux.Vars(r)
-    		word := params["word"]
+    		mot := params["mot"]
 
     		// Récupère la définition depuis le dictionnaire
-    		entry, err := dictionary.Get(word)
+    		entry, err := dictionary.Get(mot)
     		if err != nil {
     			http.Error(w, err.Error(), http.StatusNotFound)
     			return
@@ -75,10 +75,10 @@ func removeEntryHandler(dictionary *dictionary.Dictionary) http.HandlerFunc {
         // Votre logique pour supprimer une entrée ici
         // Récupère le paramètre du mot depuis l'URL de la requête
     		params := mux.Vars(r)
-    		word := params["word"]
+    		mot := params["mot"]
 
     		// Supprime l'entrée du dictionnaire
-    		dictionary.Remove(word)
+    		dictionary.Remove(mot)
 
     		w.Write([]byte("Entrée supprimée avec succès"))
     }

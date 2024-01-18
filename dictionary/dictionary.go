@@ -10,7 +10,7 @@ import (
 
 //L'entrée représente une entrée dans le dictionnaire avec un mot et sa définition
 type Entry struct {
-	Word string `json:"word"`
+	Word string `json:"mot"`
 	Definition string `json:"definition"`
 }
 
@@ -53,7 +53,7 @@ func (d *Dictionary) Get(mot string) (Entry, error) {
         line := scanner.Text()
         parts := strings.SplitN(line, ":", 2)
         if len(parts) == 2 && strings.TrimSpace(parts[0]) == mot {
-            return Entry{Definition: strings.TrimSpace(parts[1])}, nil
+            return Entry{Word: strings.TrimSpace(parts[0]), Definition: strings.TrimSpace(parts[1])}, nil
         }
     }
 
