@@ -1,7 +1,6 @@
 package route
 
 import (
-    "fmt"
     "encoding/json"
     "github.com/gorilla/mux"
     "net/http"
