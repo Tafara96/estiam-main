@@ -1,19 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
   "github.com/Tafara96/estiam-main/routes"
 	"github.com/Tafara96/estiam-main/dictionary"
 )
 
 func main() {
-	// Create a new dictionary with a filename
+	//Création d'un nouveau dictionnaire avec un nom de fichier
   myDictionary := dictionary.New("dictionary.txt")
 
-  // Setup routes
+  //Mise en place des routes
   router := route.SetupRoutes(myDictionary)
 
-  // Start the server
+  //Demmarer le serveur
+	fmt.Sprintf("Serveur Démarré")
   http.Handle("/", router)
   http.ListenAndServe(":8080", nil)
 }
