@@ -1,39 +1,21 @@
 package main
 
 import (
-  "fmt"
+	"net/http"
+  "route"
 	"github.com/Tafara96/estiam-main/dictionary"
 )
 
 func main() {
-	//Créer un nouveau dictionnaire
-	leDictionnaire := dictionary.New("dictionary.txt")
+	// Create a new dictionary with a filename
+  myDictionary := dictionary.New("dictionary.txt")
 
-	//Ajouter des entrées au dictionnaire
-	leDictionnaire.Add("tesla", "une voiture")
-	leDictionnaire.Add("arafat", "une personne")
-	leDictionnaire.Add("paris", "une ville")
+  // Setup routes
+  router := route.SetupRoutes(myDictionary)
 
-	//Récupère et affiche la définition d'un mot spécifique
-	motRecherche := "arafat"
-	entry, err := leDictionnaire.Get(motRecherche)
-	if err != nil {
-		fmt.Printf("Erreur: %s\n", err)
-	} else {
-		fmt.Printf("La definition de '%s' est %s\n", motRecherche, entry)
-	}
-
-	//Supprimer un mot du dictionnaire
-	motIndesire := "tesla"
-	leDictionnaire.Remove(motIndesire)
-	fmt.Printf("'%s' à été retiré du dictionnaire \n", motIndesire)
-
-	//Liste tous les mots et leurs entrées dans le dictionnaire
-	listeDeMots, entries := leDictionnaire.List()
-	fmt.Println("Liste triée des mots du dictionnaire:")
-	for _, word := range listeDeMots {
-		fmt.Printf("%s: %s\n", word, entries[word])
-	}
+  // Start the server
+  http.Handle("/", router)
+  http.ListenAndServe(":8080", nil)
 }
 
 /*func actionAdd(d *dictionary.Dictionary, reader *bufio.Reader) {
