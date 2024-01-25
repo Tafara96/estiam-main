@@ -78,7 +78,7 @@ func (d *Dictionary) Remove(mot string) error {
     for _, line := range lignes {
         parts := strings.SplitN(line, ":", 2)
         if len(parts) == 2 && strings.TrimSpace(parts[0]) == mot {
-            continue // Skip the line to remove the entry
+            continue //Passer la ligne pour supprimer l'entrée
         }
         updatedLines = append(updatedLines, line)
     }
