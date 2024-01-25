@@ -7,7 +7,7 @@ import (
     "time"
 )
 
-// LoggerMiddleware enregistre les informations de la requête dans un fichier journal.
+// LoggerMiddleware enregistre les informations de la requête dans un fichier log.
 func LoggerMiddleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         // Enregistre l'heure actuelle, la méthode HTTP et le chemin de la requête
@@ -17,7 +17,7 @@ func LoggerMiddleware(next http.Handler) http.Handler {
         logFile, err := os.OpenFile("access.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
         if err != nil {
             // En cas d'erreur, continue la requête sans journalisation
-            fmt.Println("Erreur lors de l'ouverture du fichier journal :", err)
+            fmt.Println("Erreur lors de l'ouverture du fichier log :", err)
             next.ServeHTTP(w, r)
             return
         }
@@ -25,7 +25,7 @@ func LoggerMiddleware(next http.Handler) http.Handler {
 
         _, err = logFile.WriteString(logMessage)
         if err != nil {
-            fmt.Println("Erreur lors de l'écriture dans le fichier journal :", err)
+            fmt.Println("Erreur lors de l'écriture dans le fichier log :", err)
         }
 
         // Passe la requête au gestionnaire suivant

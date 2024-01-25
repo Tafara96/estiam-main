@@ -8,7 +8,7 @@ import (
     "github.com/Tafara96/estiam-main/middleware"
 )
 
-func SetupRoutes(dictionary *dictionary.Dictionary) *mux.Router {
+func RoutesDefinition(dictionary *dictionary.Dictionary) *mux.Router {
     router := mux.NewRouter()
 
     // Ajoute le middleware LoggerMiddleware à toutes les routes
@@ -19,19 +19,19 @@ func SetupRoutes(dictionary *dictionary.Dictionary) *mux.Router {
     authenticatedRouter.Use(middleware.AuthMiddleware)
 
     // Route pour ajouter une entrée au dictionnaire (POST)
-    router.HandleFunc("/dictionary/add", addEntryHandler(dictionary)).Methods("POST")
+    router.HandleFunc("/dictionary/add", gestionnairePointEntreeAdd(dictionary)).Methods("POST")
 
     // Route pour récupérer une définition par mot (GET)
-    router.HandleFunc("/dictionary/{mot}", getDefinitionHandler(dictionary)).Methods("GET")
+    router.HandleFunc("/dictionary/{mot}", gestionnairePointEntreeGet(dictionary)).Methods("GET")
 
     // Route pour supprimer une entrée par mot (DELETE)
-    router.HandleFunc("/dictionary/{mot}", removeEntryHandler(dictionary)).Methods("DELETE")
+    router.HandleFunc("/dictionary/{mot}", gestionnairePointEntreeRemove(dictionary)).Methods("DELETE")
 
     return router
 }
 
 // Handlers
-func addEntryHandler(dictionnaire *dictionary.Dictionary) http.HandlerFunc {
+func gestionnairePointEntreeAdd(dictionnaire *dictionary.Dictionary) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         // Votre logique pour ajouter une entrée ici
         var entry dictionary.Entry
@@ -51,7 +51,7 @@ func addEntryHandler(dictionnaire *dictionary.Dictionary) http.HandlerFunc {
     }
 }
 
-func getDefinitionHandler(dictionary *dictionary.Dictionary) http.HandlerFunc {
+func gestionnairePointEntreeGet(dictionary *dictionary.Dictionary) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         // Votre logique pour récupérer une définition ici
         // Récupère le paramètre du mot depuis l'URL de la requête
@@ -70,7 +70,7 @@ func getDefinitionHandler(dictionary *dictionary.Dictionary) http.HandlerFunc {
     }
 }
 
-func removeEntryHandler(dictionary *dictionary.Dictionary) http.HandlerFunc {
+func gestionnairePointEntreeRemove(dictionary *dictionary.Dictionary) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         // Votre logique pour supprimer une entrée ici
         // Récupère le paramètre du mot depuis l'URL de la requête

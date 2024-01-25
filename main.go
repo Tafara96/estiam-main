@@ -11,11 +11,12 @@ func main() {
 	//Création d'un nouveau dictionnaire avec un nom de fichier
   leDictionnaire := dictionary.New("dictionary.txt")
 
+	fmt.Sprintf("Serveur Démarré");
+
   //Mise en place des routes
-  router := route.SetupRoutes(leDictionnaire)
+  router := route.RoutesDefinition(leDictionnaire)
 
   //Demmarer le serveur
-	fmt.Sprintf("Serveur Démarré")
   http.Handle("/", router)
   http.ListenAndServe(":8080", nil)
 }
